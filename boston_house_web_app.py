@@ -83,10 +83,6 @@ st.write("### Accuracy of the Model")
 st.write(accuracy)
 st.write('---')
 
-# plotting graph
-
-
-
 
 st.write("""
 Created by ***Somenath Choudhury*** and ***Vishal Lazrus***
