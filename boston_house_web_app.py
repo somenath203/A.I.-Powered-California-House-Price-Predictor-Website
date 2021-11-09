@@ -1,5 +1,5 @@
-from numpy import mod
 import streamlit as st
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import datasets
@@ -12,9 +12,9 @@ st.write("""
 st.write('---')
 
 # Loads the Boston House Price Dataset
-boston = datasets.load_boston()
-X = pd.DataFrame(boston.data, columns=boston.feature_names)
-Y = pd.DataFrame(boston.target)
+housing = datasets.load_boston()
+X = pd.DataFrame(housing.data, columns=housing.feature_names)
+Y = pd.DataFrame(housing.target)
 
 # Sidebar
 # Header of Specify Input Parameters
@@ -50,6 +50,13 @@ def user_input_features():
     features = pd.DataFrame(data, index=[0])
     return features
 
+
+# displaying the dataset
+st.write("### Boston Dataset")
+st.dataframe(X)
+st.write('---')
+
+
 df = user_input_features()
 
 # Main Panel
@@ -62,7 +69,7 @@ st.write('---')
 # splitting into training data and testing data
 from sklearn.model_selection import train_test_split
 
-X_train,X_test,y_train,y_test = train_test_split(X,Y)
+X_train,X_test,y_train,y_test = train_test_split(X,Y, test_size=0.2, random_state=42)
 
 
 # Build Regression Model
@@ -72,16 +79,27 @@ model.fit(X_train, y_train)
 prediction = model.predict(df)
 
 
+# converting the predicted value from array to number
+arr = np.array([[prediction]])
+arr_zero = arr[0,0] 
+arr_no = arr_zero.squeeze()
+
+# displaying the actual test data
+st.write("### Actual Test Data(Price)")
+st.dataframe(Y)
+st.write('---')
+
 st.write("### Predicted Price of the New House based on the Input Parameters inserted by the User")
-st.write(prediction)
+st.write(f"#### *Price :- $ {arr_no}*")
 st.write('---')
 
 # predicting accuracy of our model
 accuracy = model.score(X_test,y_test)
 
 st.write("### Accuracy of the Model")
-st.write(accuracy)
+st.write(f"#### *Accuracy :- {accuracy}*")
 st.write('---')
+
 
 
 st.write("""
