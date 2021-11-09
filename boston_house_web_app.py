@@ -1,3 +1,4 @@
+from numpy import mod
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 
 st.write("""
 # Boston House Price Predictior
-#### Here, we predict the price of Boston House.
+##### Here, we predict the price of Boston House.
 """)
 st.write('---')
 
@@ -54,19 +55,37 @@ df = user_input_features()
 # Main Panel
 
 # Print specified input parameters
-st.header('Specified Input parameters')
+st.write("### Specified Input Parameters")
 st.write(df)
 st.write('---')
 
+# splitting into training data and testing data
+from sklearn.model_selection import train_test_split
+
+X_train,X_test,y_train,y_test = train_test_split(X,Y)
+
+
 # Build Regression Model
 model = LinearRegression()
-model.fit(X, Y)
+model.fit(X_train, y_train)
 # Apply Model to Make Prediction
 prediction = model.predict(df)
 
-st.header('Prediction of Price of a New House')
+
+st.write("### Predicted Price of the New House based on the Input Parameters inserted by the User")
 st.write(prediction)
 st.write('---')
+
+# predicting accuracy of our model
+accuracy = model.score(X_test,y_test)
+
+st.write("### Accuracy of the Model")
+st.write(accuracy)
+st.write('---')
+
+# plotting graph
+
+
 
 
 st.write("""
