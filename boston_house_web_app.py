@@ -62,13 +62,13 @@ df = user_input_features()
 
 # Print specified input parameters
 st.write("### Specified Input Parameters")
-st.write(df)
+st.dataframe(df)
 st.write('---')
 
 # splitting into training data and testing data
 from sklearn.model_selection import train_test_split
 
-X_train,X_test,y_train,y_test = train_test_split(X,Y, test_size=0.2, random_state=42)
+X_train,X_test,y_train,y_test = train_test_split(X,Y, test_size=0.4, random_state=115)
 
 
 # Build Regression Model
@@ -100,7 +100,19 @@ st.write(f"#### *Accuracy :- {accuracy}*")
 st.write('---')
 
 
+# plotting the contributions of each parameter in graph
+st.write("### Contributions of Each Input Parameter in Graph")
+chart_data = pd.DataFrame(
+    df,
+    columns=["CRIM","ZN","INDUS","CHAS","NOX","RM","AGE","DIS","RAD","TAX","PTRATIO","B","LSTAT"]
+)
+st.bar_chart(chart_data)
+st.write('---')
+
 
 st.write("""
 Created by ***Somenath Choudhury*** and ***Vishal Lazrus***
 """)
+
+
+
