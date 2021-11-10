@@ -101,7 +101,7 @@ st.write('---')
 
 
 # plotting the contributions of each parameter in graph
-st.write("### Contributions of Each Input Parameter in Graph")
+st.write("### Contributions of Each Input Parameter in the form of Bar Chart")
 chart_data = pd.DataFrame(
     df,
     columns=["CRIM","ZN","INDUS","CHAS","NOX","RM","AGE","DIS","RAD","TAX","PTRATIO","B","LSTAT"]
