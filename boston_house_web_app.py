@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn import datasets
+from sklearn import datasets 
 from sklearn.linear_model import LinearRegression
 
 st.write("""
@@ -142,8 +142,8 @@ st.bar_chart(chart_data)
 st.write('---')
 
 
-st.write("""
-Created by ***Somenath Choudhury*** and ***Vishal Lazrus***
+st.write(""" 
+Created by ***Somenath Choudhury*** 
 """)
 
 
